@@ -19,7 +19,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-var SchemeGroupVersion = schema.GroupVersion{Group: "example.crd.code-generator.k8s.io", Version: "v1"}
+var SchemeGroupVersion = schema.GroupVersion{Group: "example.com", Version: "v1"}
 
 var (
 	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api.
