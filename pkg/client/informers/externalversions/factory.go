@@ -24,7 +24,7 @@ import (
 	time "time"
 
 	versioned "github.com/sakiib/crd/pkg/client/clientset/versioned"
-	examplecom "github.com/sakiib/crd/pkg/client/informers/externalversions/example.com"
+	bookcom "github.com/sakiib/crd/pkg/client/informers/externalversions/book.com"
 	internalinterfaces "github.com/sakiib/crd/pkg/client/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Example() examplecom.Interface
+	Book() bookcom.Interface
 }
 
-func (f *sharedInformerFactory) Example() examplecom.Interface {
-	return examplecom.New(f, f.namespace, f.tweakListOptions)
+func (f *sharedInformerFactory) Book() bookcom.Interface {
+	return bookcom.New(f, f.namespace, f.tweakListOptions)
 }

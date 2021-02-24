@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "github.com/sakiib/crd/pkg/client/clientset/versioned"
-	examplev1 "github.com/sakiib/crd/pkg/client/clientset/versioned/typed/example.com/v1"
-	fakeexamplev1 "github.com/sakiib/crd/pkg/client/clientset/versioned/typed/example.com/v1/fake"
+	bookv1alpha1 "github.com/sakiib/crd/pkg/client/clientset/versioned/typed/book.com/v1alpha1"
+	fakebookv1alpha1 "github.com/sakiib/crd/pkg/client/clientset/versioned/typed/book.com/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -76,7 +76,7 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// ExampleV1 retrieves the ExampleV1Client
-func (c *Clientset) ExampleV1() examplev1.ExampleV1Interface {
-	return &fakeexamplev1.FakeExampleV1{Fake: &c.Fake}
+// BookV1alpha1 retrieves the BookV1alpha1Client
+func (c *Clientset) BookV1alpha1() bookv1alpha1.BookV1alpha1Interface {
+	return &fakebookv1alpha1.FakeBookV1alpha1{Fake: &c.Fake}
 }
