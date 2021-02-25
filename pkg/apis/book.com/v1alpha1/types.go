@@ -56,6 +56,6 @@ type BookAPISpec struct {
 }
 
 type BookAPIStatus struct {
-	Phase        string `json:"phase"`
-	ReplicaCount int64  `json:"replica_count"`
+	Phase        string `json:"phase,omitempty"`
+	ReplicaCount int64  `json:"replica_count,omitempty"`
 }

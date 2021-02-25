@@ -54,9 +54,6 @@ spec:
               replica_count:
                 format: int64
                 type: integer
-            required:
-            - phase
-            - replica_count
             type: object
         required:
         - spec

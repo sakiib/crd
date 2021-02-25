@@ -1,7 +1,7 @@
 apiVersion: book.com/v1alpha1
 kind: BookAPI
 metadata:
-  name: bookapi-bookloyment
+  name: bookapis.book.com
 spec:
   replica: 2
   image: sakibalamin/apiserver:1.0.1
