@@ -8,11 +8,11 @@ import (
 )
 
 func main() {
-	if err := exec.Command("chmod", "+x", "vendor/k8s.io/code-generator/generate-groups.sh").Run(); err != nil {
+	if err := exec.Command("chmod", "+x", "/home/sakib/go/src/k8s.io/code-generator/generate-groups.sh").Run(); err != nil {
 		panic(errors.Wrapf(err, "chmod"))
 	}
 
-	out, err := exec.Command("vendor/k8s.io/code-generator/generate-groups.sh", "all", "github.com/sakiib/crd/pkg/client", "github.com/sakiib/crd/pkg/apis", "book.com:v1alpha1").Output()
+	out, err := exec.Command("/home/sakib/go/src/k8s.io/code-generator/generate-groups.sh", "all", "github.com/sakiib/crd/pkg/client", "github.com/sakiib/crd/pkg/apis", "book.com:v1alpha1").Output()
 	if err != nil {
 		panic(errors.Wrapf(err, "run generator"))
 	}
