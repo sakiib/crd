@@ -1,0 +1,10 @@
+apiVersion: book.com/v1alpha1
+kind: BookAPI
+metadata:
+  name: bookapi-bookloyment
+spec:
+  replica: 2
+  image: sakibalamin/apiserver:1.0.1
+  port: 8080
+  username: sakib
+  password: MTIzNDU=
