@@ -1,9 +1,9 @@
 apiVersion: book.com/v1alpha1
 kind: BookAPI
 metadata:
-  name: bookapis.book.com
+  name: bookapis
 spec:
-  replica: 2
+  replica: 5
   image: sakibalamin/apiserver:1.0.1
   port: 8080
   username: sakib
