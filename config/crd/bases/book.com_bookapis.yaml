@@ -39,13 +39,23 @@ spec:
                 format: int64
                 type: integer
               replica:
+                default: 1
                 format: int64
                 type: integer
+              serviceName:
+                type: string
+              serviceType:
+                default: ClusterIP
+                enum:
+                - ClusterIP
+                - NodePort
+                type: string
               username:
                 type: string
             required:
             - image
             - replica
+            - serviceType
             type: object
           status:
             properties:

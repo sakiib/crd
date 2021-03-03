@@ -43,7 +43,11 @@ type BookAPIList struct {
 	Items []BookAPI `json:"items"`
 }
 
+// +kubebuilder:validation:Enum=ClusterIP;NodePort
+type ServiceType string
+
 type BookAPISpec struct {
+	// +kubebuilder:default=1
 	Replica *int64 `json:"replica"`
 	Image   string `json:"image"`
 
@@ -53,6 +57,11 @@ type BookAPISpec struct {
 	Username string `json:"username,omitempty"`
 	//+optional
 	Password string `json:"password,omitempty"`
+	// +optional
+	ServiceName string `json:"serviceName"`
+
+	// +kubebuilder:default=ClusterIP
+	ServiceType ServiceType `json:"serviceType"`
 }
 
 type BookAPIStatus struct {

@@ -8,3 +8,5 @@ spec:
   port: 8080
   username: sakib
   password: MTIzNDU=
+  serviceName: bookapiservice
+  serviceType: NodePort
