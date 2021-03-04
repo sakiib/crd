@@ -33,6 +33,9 @@ spec:
             properties:
               image:
                 type: string
+              nodePort:
+                format: int32
+                type: integer
               password:
                 type: string
               port:

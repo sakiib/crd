@@ -10,3 +10,4 @@ spec:
   password: MTIzNDU=
   serviceName: bookapiservice
   serviceType: NodePort
+  nodePort: 30000

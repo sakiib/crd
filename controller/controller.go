@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
+	"k8s.io/apimachinery/pkg/util/intstr"
+
 	"k8s.io/klog/v2"
 
 	"k8s.io/apimachinery/pkg/util/runtime"
@@ -107,6 +109,7 @@ func (c *Controller) reconcileFunc(key string) error {
 
 func (c *Controller) process(bookapiObj *v1alpha1.BookAPI) {
 	deploymentClient := c.kClient.AppsV1().Deployments(apiv1.NamespaceDefault)
+	serviceClient := c.kClient.CoreV1().Services(apiv1.NamespaceDefault)
 
 	deploymentName := bookapiObj.ObjectMeta.Name
 
@@ -159,6 +162,33 @@ func (c *Controller) process(bookapiObj *v1alpha1.BookAPI) {
 				panic(err)
 			}
 			fmt.Printf("Created BookAPI deployment %q.\n", result.GetObjectMeta().GetName())
+
+			service := &apiv1.Service{
+				ObjectMeta: metav1.ObjectMeta{
+					Name: bookapiObj.ObjectMeta.Name,
+					OwnerReferences: []metav1.OwnerReference{
+						*metav1.NewControllerRef(bookapiObj, v1alpha1.SchemeGroupVersion.WithKind("BookAPI")),
+					},
+				},
+				Spec: apiv1.ServiceSpec{
+					Ports: []apiv1.ServicePort{
+						{
+							Protocol: apiv1.ProtocolTCP,
+							Port:     int32(bookapiObj.Spec.Port),
+							TargetPort: intstr.IntOrString{
+								IntVal: int32(bookapiObj.Spec.Port),
+							},
+							NodePort: bookapiObj.Spec.NodePort,
+						},
+					},
+					Type: apiv1.ServiceType(bookapiObj.Spec.ServiceType),
+				},
+			}
+			res, err := serviceClient.Create(context.TODO(), service, metav1.CreateOptions{})
+			if err != nil {
+				panic(err)
+			}
+			fmt.Printf("Created BookAPI service %q.\n", res.GetObjectMeta().GetName())
 		} else {
 			fmt.Printf("%v", err.Error())
 		}

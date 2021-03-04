@@ -62,6 +62,7 @@ type BookAPISpec struct {
 
 	// +kubebuilder:default=ClusterIP
 	ServiceType ServiceType `json:"serviceType"`
+	NodePort    int32       `json:"nodePort,omitempty"`
 }
 
 type BookAPIStatus struct {
