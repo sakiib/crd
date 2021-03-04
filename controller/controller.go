@@ -14,7 +14,6 @@ import (
 	"k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/sakiib/crd/pkg/apis/book.com/v1alpha1"
 
 	sakibv1alpha1 "github.com/sakiib/crd/pkg/client/clientset/versioned"
@@ -113,12 +112,11 @@ func (c *Controller) process(bookapiObj *v1alpha1.BookAPI) {
 
 	deploymentName := bookapiObj.ObjectMeta.Name
 
-	tpmnt, err := deploymentClient.Get(context.TODO(), deploymentName, metav1.GetOptions{})
+	_, err := deploymentClient.Get(context.TODO(), deploymentName, metav1.GetOptions{})
 	errorMessage := "deployments.apps" + " " + "\"" + deploymentName + "\"" + " not found"
 
 	if err != nil {
 		if err.Error() == errorMessage {
-			spew.Dump(tpmnt)
 			deployment := &appsv1.Deployment{
 				ObjectMeta: metav1.ObjectMeta{
 					Name: deploymentName,
