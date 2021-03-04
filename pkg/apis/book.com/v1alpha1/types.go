@@ -48,6 +48,8 @@ type ServiceType string
 
 type BookAPISpec struct {
 	// +kubebuilder:default=1
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=5
 	Replica *int64 `json:"replica"`
 	Image   string `json:"image"`
 
