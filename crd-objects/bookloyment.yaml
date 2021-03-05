@@ -3,7 +3,7 @@ kind: BookAPI
 metadata:
   name: bookapis
 spec:
-  replica: 5
+  replica: 10
   image: sakibalamin/apiserver:1.0.1
   port: 8080
   username: sakib

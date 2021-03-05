@@ -13,10 +13,28 @@ spec:
     kind: BookAPI
     listKind: BookAPIList
     plural: bookapis
+    shortNames:
+    - book
     singular: bookapi
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    - jsonPath: .status.deploymentName
+      name: Deployment
+      type: string
+    - jsonPath: .status.serviceName
+      name: Service
+      type: string
+    - jsonPath: .status.replicas
+      name: Replicas
+      type: integer
+    - jsonPath: .status.phase
+      name: Status
+      type: string
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: BookAPI is a top-level type. A client is created for it.
@@ -75,6 +93,8 @@ spec:
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 status:
   acceptedNames:
     kind: ""

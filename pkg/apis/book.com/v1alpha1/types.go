@@ -11,12 +11,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// +groupName=book.com
+// +kubebuilder:object:generator=true
 package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+// +kubebuilder:object:root=true
+// +kubebuilder:resource:path=bookapis,singular=bookapi,shortName=book,categories={}
+// +kubebuilder:printcolumn:JSONPath=".metadata.creationTimestamp",name=Age,type=date
+// +kubebuilder:printcolumn:JSONPath=".status.deploymentName",name=Deployment,type=string
+// +kubebuilder:printcolumn:JSONPath=".status.serviceName",name=Service,type=string
+// +kubebuilder:printcolumn:JSONPath=".status.replicas",name=Replicas,type=integer
+// +kubebuilder:printcolumn:JSONPath=".status.phase",name=Status,type=string
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
